@@ -16,15 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref-branch: dev
+          ref: dev
           fetch-depth: 0
       - name: Get changed files
         id: cf-step
         uses: tj-actions/changed-files@v32.1.2
         with:
           separator: ","
-          files: |
-            **.sql
+
       - name: List all added files
         run: |
           for file in ${{ steps.cf-step.outputs.all_changed_files }}; do
