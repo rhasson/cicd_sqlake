@@ -1,0 +1,40 @@
+name: development
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  execute_sql:
+    name: Execute SQL
+    environment:
+      name: development
+    if: github.event.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: cf-step
+        uses: tj-actions/changed-files@v29.0.7
+        with:
+          separator: ","
+          files: |
+            **.sql
+      - name: List all added files
+        run: |
+          for file in ${{ steps.cf-step.outputs.all_changed_files }}; do
+            echo "$file was added"
+          done
+      - name: Execute changed or added files
+        uses: rhasson/sqlake_action@main
+        with:
+           file_list: ${{ steps.cf-step.outputs.all_changed_files }}
+           api_key: ${{ secrets.API_KEY }}
+           api_endpoint: 'https://api.upsolver.com'
+      - name: Print Results
+        run: |
+          cat ${GITHUB_WORKSPACE}/execution_output.md >> $GITHUB_STEP_SUMMARY
