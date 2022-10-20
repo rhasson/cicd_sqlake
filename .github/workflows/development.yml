@@ -16,6 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          ref-branch: dev
           fetch-depth: 0
       - name: Get changed files
         id: cf-step
