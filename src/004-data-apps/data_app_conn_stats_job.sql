@@ -1,4 +1,4 @@
-/* create a job to aggregate the connection stats */
+/* create a data app job to aggregate the connection stats */
 CREATE JOB data_app_conn_stats_job
     COMPUTE_CLUSTER = "Default Compute"
     START_FROM = NOW
