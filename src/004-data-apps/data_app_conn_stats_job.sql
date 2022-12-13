@@ -6,7 +6,7 @@ CREATE JOB data_app_conn_stats_job
     AS INSERT INTO default_glue_catalog.cicd.data_app_conn_stats
     MAP_COLUMNS_BY_NAME
     SELECT 
-      dt::date AS dt,
+      dt as dt_partition,
       source_ip_address,
       destination_port,
       sum(num_packets_transferred::bigint) AS total_packets_sent,
