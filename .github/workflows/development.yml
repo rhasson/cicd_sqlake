@@ -23,7 +23,6 @@ jobs:
         uses: tj-actions/changed-files@v32.1.2
         with:
           separator: ","
-
       - name: List all added files
         run: |
           for file in ${{ steps.cf-step.outputs.all_changed_files }}; do
