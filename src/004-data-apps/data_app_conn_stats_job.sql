@@ -16,5 +16,5 @@ CREATE JOB data_app_conn_stats_job
     WHERE
       log_status = 'OK'
       AND action = 'ACCEPT'
-      AND $commit_time BETWEEN run_start_time() AND run_end_time();
-    GROUP BY 1,2,3
+      AND $commit_time BETWEEN run_start_time() AND run_end_time()
+    GROUP BY 1,2,3;
